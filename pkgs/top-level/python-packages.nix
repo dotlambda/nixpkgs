@@ -6744,6 +6744,8 @@ in {
     };
   };
 
+  mido = callPackage ../development/python-modules/mido {};
+
   mwlib = let
     pyparsing = buildPythonPackage rec {
       name = "pyparsing-1.5.7";
