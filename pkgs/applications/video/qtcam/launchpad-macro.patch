@@ -1,0 +1,13 @@
+diff --git a/src/common.h b/src/common.h
+index 0fe4cf2..1bd6ee5 100644
+--- a/common.h
++++ b/common.h
+@@ -1,7 +1,7 @@
+ #ifndef COMMON_H
+ #define COMMON_H
+ 
+-#define LAUNCHPAD 1   // by Default, this variable is set as 1.
++#define LAUNCHPAD 0   // by Default, this variable is set as 1.
+ 		     // when the source is taken from econ git hub and build manually, This variable needs to be set as 0.
+ 
+ 

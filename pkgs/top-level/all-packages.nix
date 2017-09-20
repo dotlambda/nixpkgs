@@ -15523,6 +15523,8 @@ with pkgs;
 
   polybar = callPackage ../applications/misc/polybar { };
 
+  qtcam = libsForQt5.callPackage ../applications/video/qtcam { };
+
   rssguard = libsForQt5.callPackage ../applications/networking/feedreaders/rssguard { };
 
   scudcloud = callPackage ../applications/networking/instant-messengers/scudcloud { };
