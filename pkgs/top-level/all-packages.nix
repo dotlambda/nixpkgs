@@ -15953,6 +15953,8 @@ with pkgs;
 
   qjackctl = libsForQt5.callPackage ../applications/audio/qjackctl { };
 
+  qmapshack = libsForQt5.callPackage ../applications/misc/qmapshack { };
+
   qmetro = callPackage ../applications/misc/qmetro { };
 
   qmidinet = callPackage ../applications/audio/qmidinet { };
