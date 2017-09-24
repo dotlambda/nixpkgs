@@ -4175,6 +4175,8 @@ with pkgs;
 
   rnv = callPackage ../tools/text/xml/rnv { };
 
+  routino = callPackage ../tools/misc/routino { };
+
   rq = callPackage ../development/tools/rq {
     v8 = v8_static;
   };
