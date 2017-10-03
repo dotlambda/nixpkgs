@@ -76,6 +76,7 @@
 , "stylus"
 , "svgo"
 , "tern"
+, { "ttws": "git://github.com/Dica-Developer/ttws.git" }
 , "typescript"
 , "typings"
 , "uglify-js"
