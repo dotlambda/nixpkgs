@@ -14748,6 +14748,10 @@ with pkgs;
 
   inherit (gnome3) gitg;
 
+  git-annex-metadata-gui = libsForQt5.callPackage ../applications/misc/git-annex-metadata-gui {
+    inherit (python3Packages) buildPythonApplication fetchPypi pyqt5 git-annex-adapter;
+  };
+
   giv = callPackage ../applications/graphics/giv { };
 
   gmrun = callPackage ../applications/misc/gmrun {};
