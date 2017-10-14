@@ -5842,6 +5842,8 @@ in {
     };
   };
 
+  git-annex-adapter = callPackage ../development/python-modules/git-annex-adapter { };
+
   google-cloud-sdk = callPackage ../tools/admin/google-cloud-sdk { };
 
   google-compute-engine = callPackage ../tools/virtualization/google-compute-engine { };
