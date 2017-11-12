@@ -17700,6 +17700,8 @@ with pkgs;
 
   cockatrice = libsForQt5.callPackage ../games/cockatrice {  };
 
+  colorcode = libsForQt5.callPackage ../games/colorcode { };
+
   commandergenius = callPackage ../games/commandergenius { };
 
   confd = callPackage ../tools/system/confd { };
