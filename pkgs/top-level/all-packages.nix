@@ -1262,6 +1262,8 @@ with pkgs;
 
   appdata-tools = callPackage ../tools/misc/appdata-tools { };
 
+  arch-bootstrap = callPackage ../tools/misc/arch-bootstrap { };
+
   asciidoc = callPackage ../tools/typesetting/asciidoc {
     inherit (python2Packages) matplotlib numpy aafigure recursivePthLoader;
     w3m = w3m-batch;
