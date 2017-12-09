@@ -103,6 +103,15 @@ self: super: {
     hinotify = if pkgs.stdenv.isLinux then self.hinotify else self.fsnotify;
   };
 
+  # https://github.com/jgm/gitit/pull/608
+  gitit = appendPatch (doJailbreak super.gitit) (pkgs.fetchpatch {
+    name = "hoauth2-version.patch";
+    url = https://github.com/jgm/gitit/pull/608.patch;
+    sha256 = "0mdqa9w1p6cmli6976v4wi0sw9r4p5prkj7lzfd1877wk11c9c73";
+    # These files were not uploaded to Hackage but appear in patch
+    excludes = [ ".travis.yml" "stack.yaml" ];
+  });
+
   # Fix test trying to access /home directory
   shell-conduit = (overrideCabal super.shell-conduit (drv: {
     postPatch = "sed -i s/home/tmp/ test/Spec.hs";
