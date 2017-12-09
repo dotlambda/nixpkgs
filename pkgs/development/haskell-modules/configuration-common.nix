@@ -103,6 +103,16 @@ self: super: {
     hinotify = if pkgs.stdenv.isLinux then self.hinotify else self.fsnotify;
   };
 
+  # Temporary fix for #32377 until a new version is on Hackage
+  gitit = overrideCabal super.gitit (drv: {
+    src = pkgs.fetchFromGitHub {
+      owner = "jgm";
+      repo = "gitit";
+      rev = "c7d79c1a98712934f1e6cfc333783edf16fdb0b3";
+      sha256 = "0k73m7c2wbkm9q9qxrmvmhp07p11jxxvxdhp9f34q8nym8p897zq";
+    };
+  });
+
   # Fix test trying to access /home directory
   shell-conduit = (overrideCabal super.shell-conduit (drv: {
     postPatch = "sed -i s/home/tmp/ test/Spec.hs";
