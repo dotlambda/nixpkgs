@@ -17897,6 +17897,8 @@ with pkgs;
   amoeba = callPackage ../games/amoeba { };
   amoeba-data = callPackage ../games/amoeba/data.nix { };
 
+  androminion = callPackage ../servers/games/androminion { };
+
   andyetitmoves = if stdenv.isLinux then callPackage ../games/andyetitmoves {} else null;
 
   angband = callPackage ../games/angband { };
