@@ -29,10 +29,10 @@ let
         };
       });
       voluptuous = super.voluptuous.overridePythonAttrs (oldAttrs: rec {
-        version = "0.10.5";
+        version = "0.11.1";
         src = oldAttrs.src.override {
           inherit version;
-          sha256 = "15i3gaap8ilhpbah1ffc6q415wkvliqxilc6s69a4rinvkw6cx3s";
+          sha256 = "af7315c9fa99e0bfd195a21106c82c81619b42f0bd9b6e287b797c6b6b6a9918";
         };
       });
       hass-frontend = super.callPackage ./frontend.nix { };
@@ -51,7 +51,7 @@ let
   extraBuildInputs = extraPackages py.pkgs;
 
   # Don't forget to run parse-requirements.py after updating
-  hassVersion = "0.63.3";
+  hassVersion = "0.64.0";
 
 in with py.pkgs; buildPythonApplication rec {
   pname = "homeassistant";
@@ -64,7 +64,7 @@ in with py.pkgs; buildPythonApplication rec {
     owner = "home-assistant";
     repo = "home-assistant";
     rev = version;
-    sha256 = "1lrdrn0x8i81vbqxziv5fgcc8ldz7x5r62kfz3nyg4g43rk3dqq8";
+    sha256 = "0lazyf70mw1k05jbwldf27v44pzqzzci5jqkdas4pyjwsaz2a9hm";
   };
 
   propagatedBuildInputs = [

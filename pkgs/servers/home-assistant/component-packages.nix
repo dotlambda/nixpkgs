@@ -2,11 +2,12 @@
 # Do not edit!
 
 {
-  version = "0.63.3";
+  version = "0.64.0";
   components = {
     "nuimo_controller" = ps: with ps; [  ];
     "bbb_gpio" = ps: with ps; [  ];
     "doorbird" = ps: with ps; [  ];
+    "homekit" = ps: with ps; [  ];
     "isy994" = ps: with ps; [  ];
     "notify.html5" = ps: with ps; [ pyjwt ];
     "sensor.mvglive" = ps: with ps; [  ];
@@ -19,6 +20,7 @@
     "notify.twitter" = ps: with ps; [  ];
     "notify.yessssms" = ps: with ps; [  ];
     "abode" = ps: with ps; [  ];
+    "media_player.frontier_silicon" = ps: with ps; [  ];
     "device_tracker.automatic" = ps: with ps; [  ];
     "sensor.dnsip" = ps: with ps; [ aiodns ];
     "emulated_hue" = ps: with ps; [ aiohttp-cors ];
@@ -44,6 +46,7 @@
     "sensor.scrape" = ps: with ps; [ beautifulsoup4 ];
     "sensor.sytadin" = ps: with ps; [ beautifulsoup4 ];
     "zha" = ps: with ps; [  ];
+    "bmw_connected_drive" = ps: with ps; [  ];
     "blink" = ps: with ps; [  ];
     "light.blinksticklight" = ps: with ps; [ BlinkStick ];
     "light.blinkt" = ps: with ps; [  ];
@@ -103,8 +106,6 @@
     "sensor.fritzbox_callmonitor" = ps: with ps; [  ];
     "sensor.fritzbox_netmonitor" = ps: with ps; [  ];
     "switch.fritzdect" = ps: with ps; [  ];
-    "media_player.frontier_silicon" = ps: with ps; [  ];
-    "conversation" = ps: with ps; [  ];
     "tts.google" = ps: with ps; [  ];
     "device_tracker.bluetooth_le_tracker" = ps: with ps; [  ];
     "sensor.gearbest" = ps: with ps; [  ];
@@ -129,7 +130,6 @@
     "media_player.spotify" = ps: with ps; [  ];
     "netatmo" = ps: with ps; [  ];
     "neato" = ps: with ps; [  ];
-    "sensor.sabnzbd" = ps: with ps; [  ];
     "switch.anel_pwrctrl" = ps: with ps; [  ];
     "switch.edimax" = ps: with ps; [  ];
     "sensor.gtfs" = ps: with ps; [  ];
@@ -215,6 +215,7 @@
     "sensor.pushbullet" = ps: with ps; [ pushbullet ];
     "notify.pushetta" = ps: with ps; [  ];
     "light.rpi_gpio_pwm" = ps: with ps; [  ];
+    "august" = ps: with ps; [  ];
     "canary" = ps: with ps; [  ];
     "sensor.cpuspeed" = ps: with ps; [  ];
     "melissa" = ps: with ps; [  ];
@@ -274,6 +275,7 @@
     "lutron" = ps: with ps; [  ];
     "notify.mailgun" = ps: with ps; [  ];
     "media_player.mediaroom" = ps: with ps; [  ];
+    "media_player.xiaomi_tv" = ps: with ps; [  ];
     "mochad" = ps: with ps; [  ];
     "modbus" = ps: with ps; [  ];
     "media_player.monoprice" = ps: with ps; [  ];
@@ -294,6 +296,7 @@
     "sensor.pollen" = ps: with ps; [  ];
     "qwikswitch" = ps: with ps; [  ];
     "rainbird" = ps: with ps; [  ];
+    "sensor.sabnzbd" = ps: with ps; [  ];
     "climate.sensibo" = ps: with ps; [  ];
     "sensor.serial" = ps: with ps; [  ];
     "switch.acer_projector" = ps: with ps; [ pyserial ];
@@ -383,8 +386,10 @@
     "skybell" = ps: with ps; [  ];
     "notify.slack" = ps: with ps; [  ];
     "sleepiq" = ps: with ps; [  ];
+    "smappee" = ps: with ps; [  ];
     "media_player.snapcast" = ps: with ps; [  ];
     "sensor.speedtest" = ps: with ps; [  ];
+    "sensor.spotcrime" = ps: with ps; [  ];
     "recorder" = ps: with ps; [ sqlalchemy ];
     "sensor.sql" = ps: with ps; [ sqlalchemy ];
     "statsd" = ps: with ps; [ statsd ];
@@ -408,6 +413,7 @@
     "sensor.ups" = ps: with ps; [  ];
     "camera.uvc" = ps: with ps; [  ];
     "climate.venstar" = ps: with ps; [  ];
+    "config.config_entries" = ps: with ps; [  ];
     "volvooncall" = ps: with ps; [  ];
     "sensor.vasttrafik" = ps: with ps; [  ];
     "vultr" = ps: with ps; [ vultr ];
@@ -422,6 +428,7 @@
     "sensor.xbox_live" = ps: with ps; [  ];
     "knx" = ps: with ps; [  ];
     "media_player.bluesound" = ps: with ps; [ xmltodict ];
+    "sensor.startca" = ps: with ps; [ xmltodict ];
     "sensor.swiss_hydrological_data" = ps: with ps; [ xmltodict ];
     "sensor.ted5000" = ps: with ps; [ xmltodict ];
     "sensor.yr" = ps: with ps; [ xmltodict ];
