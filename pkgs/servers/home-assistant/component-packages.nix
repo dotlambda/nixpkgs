@@ -2,7 +2,7 @@
 # Do not edit!
 
 {
-  version = "0.63.3";
+  version = "0.64.3";
   components = {
     "abode" = ps: with ps; [  ];
     "ads" = ps: with ps; [  ];
@@ -21,6 +21,7 @@
     "arduino" = ps: with ps; [  ];
     "arlo" = ps: with ps; [  ];
     "asterisk_mbox" = ps: with ps; [  ];
+    "august" = ps: with ps; [  ];
     "axis" = ps: with ps; [  ];
     "bbb_gpio" = ps: with ps; [  ];
     "binary_sensor.concord232" = ps: with ps; [  ];
@@ -32,6 +33,7 @@
     "binary_sensor.trend" = ps: with ps; [ numpy ];
     "binary_sensor.workday" = ps: with ps; [  ];
     "blink" = ps: with ps; [  ];
+    "bmw_connected_drive" = ps: with ps; [  ];
     "calendar.caldav" = ps: with ps; [  ];
     "calendar.todoist" = ps: with ps; [ todoist ];
     "camera.foscam" = ps: with ps; [  ];
@@ -56,7 +58,7 @@
     "cloud" = ps: with ps; [  ];
     "coinbase" = ps: with ps; [  ];
     "comfoconnect" = ps: with ps; [  ];
-    "conversation" = ps: with ps; [  ];
+    "config.config_entries" = ps: with ps; [  ];
     "cover.myq" = ps: with ps; [  ];
     "daikin" = ps: with ps; [  ];
     "datadog" = ps: with ps; [ datadog ];
@@ -102,6 +104,7 @@
     "google" = ps: with ps; [ google_api_python_client oauth2client ];
     "hdmi_cec" = ps: with ps; [  ];
     "hive" = ps: with ps; [  ];
+    "homekit" = ps: with ps; [  ];
     "homematic" = ps: with ps; [ pyhomematic ];
     "http" = ps: with ps; [ aiohttp-cors ];
     "hue" = ps: with ps; [  ];
@@ -193,6 +196,7 @@
     "media_player.vizio" = ps: with ps; [  ];
     "media_player.vlc" = ps: with ps; [  ];
     "media_player.webostv" = ps: with ps; [ websockets ];
+    "media_player.xiaomi_tv" = ps: with ps; [  ];
     "media_player.yamaha" = ps: with ps; [  ];
     "media_player.yamaha_musiccast" = ps: with ps; [  ];
     "media_player.ziggo_mediabox_xl" = ps: with ps; [  ];
@@ -342,7 +346,9 @@
     "sensor.snmp" = ps: with ps; [ pysnmp ];
     "sensor.sochain" = ps: with ps; [  ];
     "sensor.speedtest" = ps: with ps; [  ];
+    "sensor.spotcrime" = ps: with ps; [  ];
     "sensor.sql" = ps: with ps; [ sqlalchemy ];
+    "sensor.startca" = ps: with ps; [ xmltodict ];
     "sensor.steam_online" = ps: with ps; [  ];
     "sensor.swiss_hydrological_data" = ps: with ps; [ xmltodict ];
     "sensor.swiss_public_transport" = ps: with ps; [  ];
@@ -369,6 +375,7 @@
     "shiftr" = ps: with ps; [ paho-mqtt ];
     "skybell" = ps: with ps; [  ];
     "sleepiq" = ps: with ps; [  ];
+    "smappee" = ps: with ps; [  ];
     "spc" = ps: with ps; [ websockets ];
     "statsd" = ps: with ps; [ statsd ];
     "switch.acer_projector" = ps: with ps; [ pyserial ];
