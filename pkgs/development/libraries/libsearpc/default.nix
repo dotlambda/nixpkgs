@@ -1,15 +1,14 @@
-{stdenv, fetchurl, automake, autoconf, pkgconfig, libtool, python2Packages, glib, jansson}:
+{stdenv, fetchFromGitHub, automake, autoconf, pkgconfig, libtool, python2Packages, glib, jansson}:
 
-stdenv.mkDerivation rec
-{
-  version = "3.0.7";
-  seafileVersion = "6.1.0";
+stdenv.mkDerivation rec {
+  version = "3.1-latest";
   name = "libsearpc-${version}";
 
-  src = fetchurl
-  {
-    url = "https://github.com/haiwen/libsearpc/archive/v${version}.tar.gz";
-    sha256 = "0fdrgksdwd4qxp7qvh75y39dy52h2f5wfjbqr00h3rwkbx4npvpg";
+  src = fetchFromGitHub {
+    owner = "haiwen";
+    repo = "libsearpc";
+    rev = "v${version}";
+    sha256 = "0sv92na3ca1c8k0v9fbaqkmsk31q7gp0562mqa1wxb4llig6kfwj";
   };
 
   patches = [ ./libsearpc.pc.patch ];
@@ -22,8 +21,7 @@ stdenv.mkDerivation rec
 
   buildPhase = "make -j1";
 
-  meta =
-  {
+  meta = {
     homepage = https://github.com/haiwen/libsearpc;
     description = "A simple and easy-to-use C language RPC framework (including both server side & client side) based on GObject System";
     license = stdenv.lib.licenses.lgpl3;
