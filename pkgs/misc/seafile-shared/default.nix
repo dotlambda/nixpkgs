@@ -1,12 +1,14 @@
-{stdenv, fetchurl, which, autoreconfHook, pkgconfig, curl, vala, python, intltool, fuse, ccnet}:
+{stdenv, fetchFromGitHub, which, autoreconfHook, pkgconfig, curl, vala, python, intltool, fuse, ccnet}:
 
 stdenv.mkDerivation rec {
-  version = "6.1.0";
+  version = "6.2.0";
   name = "seafile-shared-${version}";
 
-  src = fetchurl {
-    url = "https://github.com/haiwen/seafile/archive/v${version}.tar.gz";
-    sha256 = "03zvxk25311xgn383k54qvvpr8xbnl1vxd99fg4ca9yg5rmir1q6";
+  src = fetchFromGitHub {
+    owner = "haiwen";
+    repo = "seafile";
+    rev = "v${version}";
+    sha256 = "1n6ljvr6wcs76nhzwvzcx8652dacldjd8jkaj94gdm9cfsf1c9nm";
   };
 
   nativeBuildInputs = [ pkgconfig which autoreconfHook vala intltool ];
@@ -20,9 +22,9 @@ stdenv.mkDerivation rec {
 
   postInstall = ''
     # Remove seafile binary
-    rm -rf "$out/bin/seafile"
+    rm "$out/bin/seafile"
     # Remove cli client binary
-    rm -rf "$out/bin/seaf-cli"
+    rm "$out/bin/seaf-cli"
   '';
 
   meta = with stdenv.lib; {
