@@ -1,21 +1,23 @@
-{ stdenv, python3Packages, glibcLocales, rustPlatform }:
+{ stdenv, python3Packages, glibcLocales, rustPlatform, pkgconfig, openssl }:
 
 # Packaging documentation at:
 # https://github.com/untitaker/vdirsyncer/blob/master/docs/packaging.rst
 let
   pythonPackages = python3Packages;
-  version = "0.17.0a2";
+  version = "0.17.0a3";
   pname = "vdirsyncer";
   name = pname + "-" + version;
   src = pythonPackages.fetchPypi {
     inherit pname version;
-    sha256 = "0y464rsx5la6bp94z2g0nnkbl4nwfya08abynvifw4c84vs1gr4q";
+    sha256 = "beb95baafa66de12975e6420282f2f8a31d7316a0f88fbc902b0a65e94fbf1d8";
   };
   native = rustPlatform.buildRustPackage {
     name = name + "-native";
     inherit src;
     sourceRoot = name + "/rust";
-    cargoSha256 = "1cr7xs11gbsc3x5slga9qahchwc22qq49amf28g4jgs9lzf57qis";
+    cargoSha256 = "08xq9q5fx37azzkqqgwcnds1yd8687gh26dsl3ivql5h13fa2w3q";
+    nativeBuildInputs = [ pkgconfig ];
+    buildInputs = [ openssl ];
     postInstall = ''
       mkdir $out/include $out/lib
       cp $out/bin/libvdirsyncer_rustext* $out/lib
