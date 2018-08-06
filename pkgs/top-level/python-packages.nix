@@ -2290,6 +2290,8 @@ in {
     };
   };
 
+  eth-hash = callPackage ../development/python-modules/eth-hash { };
+
   evdev = callPackage ../development/python-modules/evdev {};
 
   eve = callPackage ../development/python-modules/eve {};
