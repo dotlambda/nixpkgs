@@ -12350,6 +12350,8 @@ in {
 
   serpy = callPackage ../development/python-modules/serpy { };
 
+  setuptools-markdown = callPackage ../development/python-modules/setuptools-markdown { };
+
   setuptools_scm = callPackage ../development/python-modules/setuptools_scm { };
 
   setuptoolsDarcs = buildPythonPackage rec {
