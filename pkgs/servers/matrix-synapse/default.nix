@@ -1,82 +1,94 @@
-{ lib, stdenv, python3
+{ lib, python3
+, extraPackages ? ps: [ ]
 , enableSystemd ? true
 }:
 
-with python3.pkgs;
-
 let
-  matrix-synapse-ldap3 = buildPythonPackage rec {
-    pname = "matrix-synapse-ldap3";
-    version = "0.1.3";
+  python = python3.override {
+    packageOverrides = self: super: {
 
-    src = fetchPypi {
-      inherit pname version;
-      sha256 = "0a0d1y9yi0abdkv6chbmxr3vk36gynnqzrjhbg26q4zg06lh9kgn";
-    };
+      matrix-synapse-ldap3 = self.buildPythonPackage rec {
+        pname = "matrix-synapse-ldap3";
+        version = "0.1.3";
 
-    propagatedBuildInputs = [ service-identity ldap3 twisted ];
+        src = self.fetchPypi {
+          inherit pname version;
+          sha256 = "0a0d1y9yi0abdkv6chbmxr3vk36gynnqzrjhbg26q4zg06lh9kgn";
+        };
 
-    # ldaptor is not ready for py3 yet
-    doCheck = !isPy3k;
-    checkInputs = [ ldaptor mock ];
-  };
+        propagatedBuildInputs = with self; [ service-identity ldap3 twisted ];
 
-in buildPythonApplication rec {
-  pname = "matrix-synapse";
-  version = "0.99.0";
-
-  src = fetchPypi {
-    inherit pname version;
-    sha256 = "1xsp60172zvgyjgpjmzz90rj1din8d65ffg73nzid4nd875p45kh";
-  };
-
-  propagatedBuildInputs = [
-    bcrypt
-    bleach
-    canonicaljson
-    daemonize
-    frozendict
-    jinja2
-    jsonschema
-    lxml
-    matrix-synapse-ldap3
-    msgpack
-    netaddr
-    phonenumbers
-    pillow
-    (prometheus_client.overrideAttrs (x: {
-      src = fetchPypi {
-        pname = "prometheus_client";
-        version = "0.3.1";
-        sha256 = "093yhvz7lxl7irnmsfdnf2030lkj4gsfkg6pcmy4yr1ijk029g0p";
+        # ldaptor is not ready for py3 yet
+        doCheck = !self.isPy3k;
+        checkInputs = with self; [ ldaptor mock ];
       };
-    }))
-    psutil
-    psycopg2
-    pyasn1
-    pymacaroons
-    pynacl
-    pyopenssl
-    pysaml2
-    pyyaml
-    requests
-    signedjson
-    sortedcontainers
-    treq
-    twisted
-    unpaddedbase64
-  ] ++ lib.optional enableSystemd systemd;
 
-  checkInputs = [ mock ];
+      prometheus_client = super.prometheus_client.overridePythonAttrs (oldAttrs: rec {
+        version = "0.3.1";
+        src = oldAttrs.src.override {
+          inherit version;
+          sha256 = "093yhvz7lxl7irnmsfdnf2030lkj4gsfkg6pcmy4yr1ijk029g0p";
+        };
+      });
 
-  checkPhase = ''
-    PYTHONPATH=".:$PYTHONPATH" trial tests
-  '';
+      matrix-synapse = self.buildPythonPackage rec {
+        pname = "matrix-synapse";
+        version = "0.99.0";
 
-  meta = with stdenv.lib; {
-    homepage = https://matrix.org;
-    description = "Matrix reference homeserver";
-    license = licenses.asl20;
-    maintainers = with maintainers; [ ralith roblabla ekleog ];
+        src = self.fetchPypi {
+          inherit pname version;
+          sha256 = "1xsp60172zvgyjgpjmzz90rj1din8d65ffg73nzid4nd875p45kh";
+        };
+
+        propagatedBuildInputs = with self; [
+          bcrypt
+          bleach
+          canonicaljson
+          daemonize
+          frozendict
+          jinja2
+          jsonschema
+          lxml
+          matrix-synapse-ldap3
+          msgpack
+          netaddr
+          phonenumbers
+          pillow
+          prometheus_client
+          psutil
+          psycopg2
+          pyasn1
+          pymacaroons
+          pynacl
+          pyopenssl
+          pysaml2
+          pyyaml
+          requests
+          signedjson
+          sortedcontainers
+          treq
+          twisted
+          unpaddedbase64
+        ] ++ extraPackages self ++ lib.optional enableSystemd systemd;
+
+        checkInputs = with self; [ mock ];
+
+        checkPhase = ''
+          PYTHONPATH=".:$PYTHONPATH" trial tests
+        '';
+
+        passthru = {
+          python = python.withPackages (ps: [ ps.matrix-synapse ]);
+        };
+
+        meta = with lib; {
+          homepage = https://matrix.org;
+          description = "Matrix reference homeserver";
+          license = licenses.asl20;
+          maintainers = with maintainers; [ ralith roblabla ekleog ];
+        };
+      };
+    };
   };
-}
+
+in with python.pkgs; toPythonApplication matrix-synapse
