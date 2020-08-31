@@ -10,7 +10,6 @@ import ./make-test-python.nix {
       enable = true;
       enableSubmission = true;
       enableSubmissions = true;
-      sslCACert = certs.ca.cert;
       sslCert = certs."acme.test".cert;
       sslKey = certs."acme.test".key;
       submissionsOptions = {
