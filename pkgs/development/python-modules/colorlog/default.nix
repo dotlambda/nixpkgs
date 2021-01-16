@@ -1,21 +1,15 @@
-{ stdenv, buildPythonPackage, fetchPypi, pytest }:
+{ stdenv, buildPythonPackage, fetchPypi, pytestCheckHook }:
 
 buildPythonPackage rec {
   pname = "colorlog";
-  version = "4.6.2";
+  version = "4.7.2";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "54e5f153419c22afc283c130c4201db19a3dbd83221a0f4657d5ee66234a2ea4";
+    sha256 = "18d05b616438a75762d7d214b9ec3b05d274466c9f3ddd92807e755840c88251";
   };
 
-  checkInputs = [ pytest ];
-
-  # tests are no longer packaged in pypi
-  doCheck = false;
-  checkPhase = ''
-    py.test -p no:logging
-  '';
+  checkInputs = [ pytestCheckHook ];
 
   pythonImportsCheck =  [ "colorlog" ];
 
