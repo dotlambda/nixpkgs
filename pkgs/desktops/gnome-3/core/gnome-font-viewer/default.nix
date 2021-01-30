@@ -11,6 +11,13 @@ stdenv.mkDerivation rec {
     sha256 = "12xrsqwmvid7hksiw4zhj4jd1qwxn8w0czskbq4yqfprwn1havxa";
   };
 
+  patches = [
+    (fetchpatch {
+      url = "https://gitlab.gnome.org/GNOME/gnome-font-viewer/-/commit/9661683379806e2bad6a52ce6dde776a33f4f981.patch";
+    sha256 = "12xrsqwmvid7hksiw4zhj4jd1qwxn8w0czskbq4yqfprwn1havxa";
+    })
+  ];
+
   doCheck = true;
 
   nativeBuildInputs = [ meson ninja pkg-config gettext wrapGAppsHook libxml2 ];
