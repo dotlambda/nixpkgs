@@ -618,6 +618,10 @@ in
           "upperdir=/nix/.rw-store/store"
           "workdir=/nix/.rw-store/work"
         ];
+        after = [
+          "/nix/.ro-store"
+          "/nix/.rw-store"
+        ];
       };
 
     boot.initrd.availableKernelModules = [ "squashfs" "iso9660" "uas" "overlay" ];
