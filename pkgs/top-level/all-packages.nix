@@ -21555,6 +21555,8 @@ in
 
   audio-recorder = callPackage ../applications/audio/audio-recorder { };
 
+  audiotube = libsForQt5.callPackage ../applications/audio/audiotube { };
+
   autokey = callPackage ../applications/office/autokey { };
 
   autotalent = callPackage ../applications/audio/autotalent { };
