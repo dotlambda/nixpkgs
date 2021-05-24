@@ -17444,6 +17444,8 @@ in
 
   proj = callPackage ../development/libraries/proj { };
 
+  proj7 = callPackage ../development/libraries/proj/7.nix { };
+
   proj-datumgrid = callPackage ../development/libraries/proj-datumgrid { };
 
   proselint = callPackage ../tools/text/proselint {
