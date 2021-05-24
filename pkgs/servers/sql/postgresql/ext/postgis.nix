@@ -4,7 +4,7 @@
 , libxml2
 , postgresql
 , geos
-, proj
+, proj7
 , gdal
 , json_c
 , pkg-config
@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
     sha256 = "0z9a39243fv37mansbbjq5mmxpnhr7xzn8pv92fr7dkdb3psz5hf";
   };
 
-  buildInputs = [ libxml2 postgresql geos proj gdal json_c protobufc ]
+  buildInputs = [ libxml2 postgresql geos proj7 gdal json_c protobufc ]
                 ++ lib.optional stdenv.isDarwin libiconv;
   nativeBuildInputs = [ perl pkg-config ];
   dontDisableStatic = true;
