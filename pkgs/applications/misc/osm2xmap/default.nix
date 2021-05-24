@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchFromGitHub, libroxml, proj, libyamlcpp, boost } :
+{ lib, stdenv, fetchFromGitHub, libroxml, proj7, libyamlcpp, boost } :
 
 stdenv.mkDerivation rec {
   pname = "osm2xmap";
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
 
   NIX_CFLAGS_COMPILE = "-DACCEPT_USE_OF_DEPRECATED_PROJ_API_H";
 
-  buildInputs = [ libroxml proj libyamlcpp boost ];
+  buildInputs = [ libroxml proj7 libyamlcpp boost ];
 
   meta = with lib; {
     homepage = "https://github.com/sembruk/osm2xmap";
