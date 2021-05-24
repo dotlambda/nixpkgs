@@ -3,7 +3,7 @@
 , cython
 , six, pyshp, shapely, geos, numpy
 , gdal, pillow, matplotlib, pyepsg, pykdtree, scipy, owslib, fiona
-, proj, flufl_lock
+, proj7, flufl_lock
 }:
 
 buildPythonPackage rec {
@@ -17,7 +17,7 @@ buildPythonPackage rec {
   };
 
   buildInputs = [
-    geos proj
+    geos proj7
   ];
 
   propagatedBuildInputs = [
@@ -44,7 +44,7 @@ buildPythonPackage rec {
   nativeBuildInputs = [
     cython
     geos # for geos-config
-    proj
+    proj7
   ];
 
   meta = with lib; {
