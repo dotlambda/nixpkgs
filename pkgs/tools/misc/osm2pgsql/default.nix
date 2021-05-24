@@ -2,7 +2,7 @@
 , fetchFromGitHub
 , cmake
 , expat
-, proj
+, proj7
 , bzip2
 , zlib
 , boost
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ cmake ];
 
-  buildInputs = [ expat proj bzip2 zlib boost postgresql libosmium protozero ]
+  buildInputs = [ expat proj7 bzip2 zlib boost postgresql libosmium protozero ]
     ++ lib.optional withLuaJIT luajit
     ++ lib.optional (!withLuaJIT) lua;
 
