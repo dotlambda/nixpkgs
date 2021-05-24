@@ -1,5 +1,5 @@
 { lib, stdenv, fetchurl, qt4, qwt6_qt4, libGLU, libGL, glew, gdal, cgal
-, proj, boost, cmake, python2, doxygen, graphviz, gmp, mpfr }:
+, proj7, boost, cmake, python2, doxygen, graphviz, gmp, mpfr }:
 
 stdenv.mkDerivation rec {
   pname = "gplates";
@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ cmake ];
   buildInputs = [
-    qt4 qwt6_qt4 libGLU libGL glew gdal cgal proj python2
+    qt4 qwt6_qt4 libGLU libGL glew gdal cgal proj7 python2
     doxygen graphviz gmp mpfr
     (boost.override {
       enablePython = true;
