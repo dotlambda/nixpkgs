@@ -1,15 +1,40 @@
-{ lib, stdenv, fetchurl, pkg-config, sqlite, expat, zlib, proj, geos, libspatialite, readosm }:
+{ lib
+, stdenv
+, fetchurl
+, pkg-config
+, geos
+, expat
+, librttopo
+, libspatialite
+, libxml2
+, minizip
+, proj
+, readosm
+, sqlite
+}:
 
 stdenv.mkDerivation rec {
-  name = "spatialite-tools-4.1.1";
+  pname = "spatialite-tools";
+  version = "5.0.0";
 
   src = fetchurl {
-    url = "https://www.gaia-gis.it/gaia-sins/spatialite-tools-sources/${name}.tar.gz";
-    sha256 = "14aqmhvab63ydbb82fglsbig7jw1wmci8jjvci07aavdhvh1pyrv";
+    url = "https://www.gaia-gis.it/gaia-sins/spatialite-tools-sources/${pname}-${version}.tar.gz";
+    sha256 = "0ckddgdpxhy6vkpr9q2hnx5qmanrd8g4pqnifbrq1i5jrj82s2dd";
   };
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ sqlite expat zlib proj geos libspatialite readosm ];
+
+  buildInputs = [
+    expat
+    geos
+    librttopo
+    libspatialite
+    libxml2
+    minizip
+    proj
+    readosm
+    sqlite
+  ];
 
   configureFlags = [ "--disable-freexl" ];
 
