@@ -7,7 +7,7 @@
 , qttools
 , qttranslations
 , gdal
-, proj
+, proj7
 , qtsvg
 , qtwebkit
 , withGeoimage ? true, exiv2
@@ -42,7 +42,7 @@ mkDerivation rec {
 
   nativeBuildInputs = [ qmake qttools ];
 
-  buildInputs = [ gdal proj qtsvg qtwebkit ]
+  buildInputs = [ gdal proj7 qtsvg qtwebkit ]
     ++ lib.optional withGeoimage exiv2
     ++ lib.optional withGpsdlib gpsd
     ++ lib.optional withLibproxy libproxy
