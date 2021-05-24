@@ -1,21 +1,36 @@
-{ lib, stdenv, fetchFromGitHub, pkg-config, sqlite, autoreconfHook, libtiff, curl }:
+{ lib
+, stdenv
+, fetchFromGitHub
+, cmake
+, pkg-config
+, sqlite
+, libtiff
+, curl
+, gtest
+}:
 
 stdenv.mkDerivation rec {
   pname = "proj";
-  version = "7.2.1";
+  version = "8.0.1";
 
   src = fetchFromGitHub {
     owner = "OSGeo";
     repo = "PROJ";
     rev = version;
-    sha256 = "0mymvfvs8xggl4axvlj7kc1ksd9g94kaz6w1vdv0x2y5mqk93gx9";
+    sha256 = "sha256-pgmv/mtqpKbgU1RuKtue7NAnMyXR1BwGJwoeA/MTrpY=";
   };
 
   outputs = [ "out" "dev"];
 
-  nativeBuildInputs = [ pkg-config autoreconfHook ];
+  nativeBuildInputs = [ cmake pkg-config ];
 
   buildInputs = [ sqlite libtiff curl ];
+
+  checkInputs = [ gtest ];
+
+  cmakeFlags = [
+    "-DUSE_EXTERNAL_GTEST=ON"
+  ];
 
   doCheck = stdenv.is64bit;
 
@@ -24,6 +39,6 @@ stdenv.mkDerivation rec {
     homepage = "https://proj4.org";
     license = licenses.mit;
     platforms = platforms.linux ++ platforms.darwin;
-    maintainers = with maintainers; [ vbgl ];
+    maintainers = with maintainers; [ vbgl dotlambda ];
   };
 }
