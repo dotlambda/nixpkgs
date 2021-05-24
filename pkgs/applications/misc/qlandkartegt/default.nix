@@ -1,6 +1,6 @@
 { mkDerivation, lib, fetchurl, fetchpatch, cmake
 , qtmultimedia, qtserialport, qtscript, qtwebkit
-, garmindev, gdal, gpsd, libdmtx, libexif, libGLU, proj }:
+, garmindev, gdal, gpsd, libdmtx, libexif, libGLU, proj7 }:
 
 mkDerivation rec {
   pname = "qlandkartegt";
@@ -54,7 +54,7 @@ mkDerivation rec {
 
   buildInputs = [
     qtmultimedia qtserialport qtscript qtwebkit
-    garmindev gdal gpsd libdmtx libexif libGLU proj
+    garmindev gdal gpsd libdmtx libexif libGLU proj7
   ];
 
   cmakeFlags = [
