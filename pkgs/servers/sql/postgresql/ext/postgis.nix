@@ -4,7 +4,7 @@
 , libxml2
 , postgresql
 , geos
-, proj7
+, proj
 , gdal
 , json_c
 , pkg-config
@@ -15,16 +15,16 @@
 }:
 stdenv.mkDerivation rec {
   pname = "postgis";
-  version = "3.1.1";
+  version = "3.1.2";
 
   outputs = [ "out" "doc" ];
 
   src = fetchurl {
     url = "https://download.osgeo.org/postgis/source/postgis-${version}.tar.gz";
-    sha256 = "0z9a39243fv37mansbbjq5mmxpnhr7xzn8pv92fr7dkdb3psz5hf";
+    sha256 = "0ch7gry8a1i9114mlhklxryn7ja3flsz6pxj9r5p09k92xh3gp9c";
   };
 
-  buildInputs = [ libxml2 postgresql geos proj7 gdal json_c protobufc ]
+  buildInputs = [ libxml2 postgresql geos proj gdal json_c protobufc ]
                 ++ lib.optional stdenv.isDarwin libiconv;
   nativeBuildInputs = [ perl pkg-config ];
   dontDisableStatic = true;
