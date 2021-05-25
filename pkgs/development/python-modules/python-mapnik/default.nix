@@ -58,10 +58,12 @@ in buildPythonPackage rec {
     libpng
     libtiff
     libwebp
-    proj
+    proj7
     zlib
   ]);
   propagatedBuildInputs = [ pillow pycairo ];
+
+  pythonImportsCheck = [ "mapnik" ];
 
   meta = with lib; {
     description = "Python bindings for Mapnik";
