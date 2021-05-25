@@ -1,6 +1,6 @@
 { lib, stdenv, fetchzip
 , boost, cairo, freetype, gdal, harfbuzz, icu, libjpeg, libpng, libtiff
-, libwebp, libxml2, proj, python, sqlite, zlib
+, libwebp, libxml2, proj7, python, sqlite, zlib
 
 # supply a postgresql package to enable the PostGIS input plugin
 , postgresql ? null
@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
 
   buildInputs =
     [ boost cairo freetype gdal harfbuzz icu libjpeg libpng libtiff
-      libwebp proj python sqlite zlib
+      libwebp proj7 python sqlite zlib
 
       # optional inputs
       postgresql
@@ -55,8 +55,8 @@ stdenv.mkDerivation rec {
   NIX_CFLAGS_COMPILE =
     if version != "3.1.0" && lib.versionAtLeast version "3.1.0"
     then throw "The mapnik compatibility workaround for proj 6 may no longer be required. Remove workaround after checking."
-    else if lib.versionAtLeast (lib.getVersion proj) "8"
-    then throw ("mapnik currently requires a version of proj less than 8, but proj version is: " + (lib.getVersion proj))
+    else if lib.versionAtLeast (lib.getVersion proj7) "8"
+    then throw ("mapnik currently requires a version of proj less than 8, but proj version is: " + (lib.getVersion proj7))
     else "-DACCEPT_USE_OF_DEPRECATED_PROJ_API_H=1";
 
   configureFlags = [
@@ -75,8 +75,8 @@ stdenv.mkDerivation rec {
     "JPEG_LIBS=${libjpeg.out}/lib"
     "PNG_INCLUDES=${libpng.dev}/include"
     "PNG_LIBS=${libpng.out}/lib"
-    "PROJ_INCLUDES=${proj.dev}/include"
-    "PROJ_LIBS=${proj.out}/lib"
+    "PROJ_INCLUDES=${proj7.dev}/include"
+    "PROJ_LIBS=${proj7.out}/lib"
     "SQLITE_INCLUDES=${sqlite.dev}/include"
     "SQLITE_LIBS=${sqlite.out}/lib"
     "TIFF_INCLUDES=${libtiff.dev}/include"
