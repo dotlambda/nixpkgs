@@ -90,7 +90,7 @@
     "blueprint" = ps: with ps; [ ];
     "bluesound" = ps: with ps; [ xmltodict ];
     "bluetooth_le_tracker" = ps: with ps; [ pygatt ];
-    "bluetooth_tracker" = ps: with ps; [ bt_proximity pybluez ];
+    "bluetooth_tracker" = ps: with ps; [ bt-proximity pybluez ];
     "bme280" = ps: with ps; [ smbus-cffi ]; # missing inputs: i2csense
     "bme680" = ps: with ps; [ bme680 smbus-cffi ];
     "bmp280" = ps: with ps; [ ]; # missing inputs: RPi.GPIO adafruit-circuitpython-bmp280
@@ -176,7 +176,7 @@
     "digital_ocean" = ps: with ps; [ digital-ocean ];
     "digitalloggers" = ps: with ps; [ ]; # missing inputs: dlipower
     "directv" = ps: with ps; [ directv ];
-    "discogs" = ps: with ps; [ discogs_client ];
+    "discogs" = ps: with ps; [ discogs-client ];
     "discord" = ps: with ps; [ discordpy ];
     "discovery" = ps: with ps; [ aiohttp-cors ifaddr netdisco zeroconf ];
     "dlib_face_detect" = ps: with ps; [ face_recognition ];
