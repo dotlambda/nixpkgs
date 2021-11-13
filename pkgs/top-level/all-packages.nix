@@ -19915,15 +19915,12 @@ with pkgs;
   opencl-clang = callPackage ../development/libraries/opencl-clang { };
 
   mapnik = callPackage ../development/libraries/mapnik {
-    gdal = gdal.override {
-      libgeotiff = libgeotiff.override { proj = proj_7; };
-      libspatialite = libspatialite.override { proj = proj_7; };
-      proj = proj_7;
+    harfbuzz = harfbuzz.override {
+      withIcu = true;
     };
     proj = proj_7;
     boost = boost175;
   };
-
 
   marisa = callPackage ../development/libraries/marisa {};
 
