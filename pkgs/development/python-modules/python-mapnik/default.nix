@@ -1,6 +1,8 @@
 { lib
 , buildPythonPackage
 , fetchFromGitHub
+, fetchpatch
+, substituteAll
 , isPyPy
 , python
 , pillow
@@ -17,35 +19,40 @@
 , mapnik
 , proj
 , zlib
+, libxml2
+, sqlite
 }:
 
 buildPythonPackage rec {
   pname = "python-mapnik";
-  version = "unstable-2020-02-24";
+  version = "unstable-2020-09-08";
 
   src = fetchFromGitHub {
     owner = "mapnik";
     repo = "python-mapnik";
-    rev = "7da019cf9eb12af8f8aa88b7d75789dfcd1e901b";
-    sha256 = "0snn7q7w1ab90311q8wgd1z64kw1svm5w831q0xd6glqhah86qc8";
+    rev = "a2c2a86eec954b42d7f00093da03807d0834b1b4";
+    sha256 = "sha256-GwDdrutJOHtW7pIWiUAiu1xucmRvp7YFYB3YSCrDsrY=";
+    fetchSubmodules = true;
   };
 
-  disabled = isPyPy;
-  doCheck = false; # doesn't find needed test data files
-  preBuild = ''
-    export BOOST_PYTHON_LIB="boost_python${"${lib.versions.major python.version}${lib.versions.minor python.version}"}"
-    export BOOST_THREAD_LIB="boost_thread"
-    export BOOST_SYSTEM_LIB="boost_system"
-    export PYCAIRO=true
-  '';
+  patches = [
+    # https://github.com/mapnik/python-mapnik/issues/239
+    (fetchpatch {
+      url = "https://github.com/koordinates/python-mapnik/commit/318b1edac16f48a7f21902c192c1dd86f6210a44.patch";
+      sha256 = "sha256-cfU8ZqPPGCqoHEyGvJ8Xy/bGpbN2vSDct6A3N5+I8xM=";
+    })
+    ./find-pycairo-with-pkg-config.patch
+    # python-mapnik seems to depend on having the mapnik src directory
+    # structure available at build time. We just hardcode the paths.
+    (substituteAll {
+      src = ./find-libmapnik.patch;
+      libmapnik = "${mapnik}/lib";
+    })
+  ];
 
   nativeBuildInputs = [
     mapnik # for mapnik_config
     pkg-config
-  ];
-
-  patches = [
-    ./find-pycairo-with-pkg-config.patch
   ];
 
   buildInputs = [
@@ -60,9 +67,25 @@ buildPythonPackage rec {
     libwebp
     proj
     zlib
+    libxml2
+    sqlite
   ];
 
   propagatedBuildInputs = [ pillow pycairo ];
+
+  configureFlags = [
+    "XMLPARSER=libxml2"
+  ];
+
+  disabled = isPyPy;
+  doCheck = false; # doesn't find needed test data files
+  preBuild = ''
+    export BOOST_PYTHON_LIB="boost_python${"${lib.versions.major python.version}${lib.versions.minor python.version}"}"
+    export BOOST_THREAD_LIB="boost_thread"
+    export BOOST_SYSTEM_LIB="boost_system"
+    export PYCAIRO=true
+    export XMLPARSER=libxml2
+  '';
 
   pythonImportsCheck = [ "mapnik" ];
 
@@ -70,6 +93,6 @@ buildPythonPackage rec {
     description = "Python bindings for Mapnik";
     maintainers = with maintainers; [ erictapen ];
     homepage = "https://mapnik.org";
-    license = licenses.lgpl21;
+    license = licenses.lgpl21Plus;
   };
 }
