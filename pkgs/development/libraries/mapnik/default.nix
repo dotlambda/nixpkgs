@@ -30,13 +30,13 @@ let
   scons = sconsPackages.scons_3_0_1;
 in stdenv.mkDerivation rec {
   pname = "mapnik-unstable";
-  version = "2021-12-03";
+  version = "2021-11-02";
 
   src = fetchFromGitHub {
     owner = "mapnik";
     repo = "mapnik";
-    rev = "6d47d3b70f4e331efe6ec3468878a4a5ef1d51c3";
-    sha256 = "sha256-PHjRy61eHF7/A5n1qHh0CZxXsJDx7RlGYK1Gr8DAP7c=";
+    rev = "dc5f497495961185997bc490109239a0c3e8d6a9";
+    sha256 = "sha256-OXMNRaKJdTvY3F9jg1AEAXO0ddhK9VxAcJQSn5opY0Y=";
     fetchSubmodules = true;
   };
 
@@ -50,6 +50,12 @@ in stdenv.mkDerivation rec {
   outputs = [ "out" ];
 
   patches = [
+    # The lib/cmake/harfbuzz/harfbuzz-config.cmake file in harfbuzz.dev is faulty,
+    # as it provides the wrong libdir. The workaround is to just rely on
+    # pkg-config to locate harfbuzz shared object files.
+    # Upstream HarfBuzz wants to drop CMake support anyway.
+    # See discussion: https://github.com/mapnik/mapnik/issues/4265
+    ./cmake-harfbuzz.patch
     # prevent CMake from trying to get libraries on the Internet
     (substituteAll {
       src = ./catch2-src.patch;
@@ -84,8 +90,6 @@ in stdenv.mkDerivation rec {
   cmakeFlags = [
     # Would require qt otherwise.
     "-DBUILD_DEMO_VIEWER=OFF"
-    # Harfbuzz's .cmake file is faulty, so we need to explicitly use pkg-config for locating it.
-    "CMAKE_DISABLE_FIND_PACKAGE_harfbuzz=OFF"
   ];
 
   # mapnik-config is currently not build with CMake. So we use the SCons for this one.
