@@ -32,6 +32,7 @@ buildPythonPackage rec {
     repo = "python-mapnik";
     rev = "a2c2a86eec954b42d7f00093da03807d0834b1b4";
     sha256 = "sha256-GwDdrutJOHtW7pIWiUAiu1xucmRvp7YFYB3YSCrDsrY=";
+    # Only needed for test data
     fetchSubmodules = true;
   };
 
