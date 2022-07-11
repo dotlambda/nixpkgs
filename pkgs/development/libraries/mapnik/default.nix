@@ -20,23 +20,21 @@
 , sqlite
 , zlib
 , catch2
-, sconsPackages
+, scons
 
   # supply a postgresql package to enable the PostGIS input plugin
 , postgresql ? null
 }:
 
-let
-  scons = sconsPackages.scons_3_0_1;
-in stdenv.mkDerivation rec {
-  pname = "mapnik-unstable";
-  version = "2021-11-02";
+stdenv.mkDerivation rec {
+  pname = "mapnik";
+  version = "unstable-2022-04-14";
 
   src = fetchFromGitHub {
     owner = "mapnik";
     repo = "mapnik";
-    rev = "dc5f497495961185997bc490109239a0c3e8d6a9";
-    sha256 = "sha256-OXMNRaKJdTvY3F9jg1AEAXO0ddhK9VxAcJQSn5opY0Y=";
+    rev = "1ba1278b4227ccd887a95880d1c75aa6446132fc";
+    sha256 = "sha256-dtu+PKpK/crO5cZje0aj+vB9beG0eU6fyT9GNtvvtbM=";
     fetchSubmodules = true;
   };
 
@@ -61,10 +59,10 @@ in stdenv.mkDerivation rec {
       src = ./catch2-src.patch;
       catch2_src = catch2.src;
     })
-
+    ./include.patch
   ];
 
-  nativeBuildInputs = [ cmake pkg-config scons ];
+  nativeBuildInputs = [ cmake pkg-config ];
 
   buildInputs = [
     boost
@@ -95,7 +93,8 @@ in stdenv.mkDerivation rec {
   # mapnik-config is currently not build with CMake. So we use the SCons for this one.
   preBuild = ''
     cd ..
-    python3 scons/scons.py utils/mapnik-config
+    # We don't put scons into nativeBuildInputs, as we build the remainder of the project with cmake.
+    ${scons}/bin/scons utils/mapnik-config
     cd build
   '';
 
