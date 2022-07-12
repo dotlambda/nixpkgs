@@ -31,9 +31,9 @@ buildPythonPackage rec {
     owner = "mapnik";
     repo = "python-mapnik";
     rev = "a2c2a86eec954b42d7f00093da03807d0834b1b4";
-    sha256 = "sha256-GwDdrutJOHtW7pIWiUAiu1xucmRvp7YFYB3YSCrDsrY=";
+    sha256 = "sha256-tKBES7ZlpvNa4f2gs5wQhCfKGli1vxsFD4jzNNPdVXY=";
     # Only needed for test data
-    fetchSubmodules = true;
+    fetchSubmodules = false;
   };
 
   patches = [
@@ -79,7 +79,9 @@ buildPythonPackage rec {
   ];
 
   disabled = isPyPy;
-  doCheck = false; # doesn't find needed test data files
+
+  doCheck = false; # segfaults at python_tests.datasource_test.test_vrt_referring_to_missing_files
+
   preBuild = ''
     export BOOST_PYTHON_LIB="boost_python${"${lib.versions.major python.version}${lib.versions.minor python.version}"}"
     export BOOST_THREAD_LIB="boost_thread"
