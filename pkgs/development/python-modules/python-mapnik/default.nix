@@ -90,7 +90,7 @@ buildPythonPackage rec {
     export XMLPARSER=libxml2
   '';
 
-  # pythonImportsCheck = [ "mapnik" ];
+  pythonImportsCheck = [ "mapnik" ];
 
   meta = with lib; {
     description = "Python bindings for Mapnik";
