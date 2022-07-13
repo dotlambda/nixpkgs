@@ -19918,7 +19918,6 @@ with pkgs;
     harfbuzz = harfbuzz.override {
       withIcu = true;
     };
-    proj = proj_7;
     boost = boost175;
   };
 
