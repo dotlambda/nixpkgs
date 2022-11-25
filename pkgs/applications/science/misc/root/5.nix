@@ -5,7 +5,7 @@
 , cmake
 , pcre
 , pkg-config
-, python2
+, python3
 , libX11
 , libXpm
 , libXft
@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ cmake pkg-config ];
-  buildInputs = [ pcre python2 zlib libxml2 lz4 xz gsl xxHash libxcrypt ]
+  buildInputs = [ pcre python3 zlib libxml2 lz4 xz gsl xxHash libxcrypt ]
     ++ lib.optionals (!stdenv.isDarwin) [ libX11 libXpm libXft libXext libGLU libGL ]
     ++ lib.optionals (stdenv.isDarwin) [ Cocoa OpenGL ]
   ;
