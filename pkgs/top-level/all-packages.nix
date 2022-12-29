@@ -27964,6 +27964,8 @@ with pkgs;
 
   bspwm = callPackage ../applications/window-managers/bspwm { };
 
+  bubblejail = libsForQt5.callPackage ../applications/misc/bubblejail { };
+
   bvi = callPackage ../applications/editors/bvi { };
 
   bviplus = callPackage ../applications/editors/bviplus { };
