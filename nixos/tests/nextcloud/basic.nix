@@ -100,6 +100,7 @@ in {
     nextcloud.wait_for_unit("multi-user.target")
     # This is just to ensure the nextcloud-occ program is working
     nextcloud.succeed("nextcloud-occ status")
+    nextcloud.succeed("nextcloud-occ integrity:check-core")
     nextcloud.succeed("curl -sSf http://nextcloud/login")
     # Ensure that no OpenSSL 1.1 is used.
     nextcloud.succeed(
