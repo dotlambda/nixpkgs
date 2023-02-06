@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, nixosTests }:
+{ lib, stdenv, fetchurl, nixosTests, jq, moreutils }:
 
 let
   generic = {
@@ -16,6 +16,23 @@ let
     };
 
     patches = [ (./patches + "/v${major}/0001-Setup-remove-custom-dbuser-creation-behavior.patch") ];
+
+    nativeBuildInputs = [
+      jq
+      moreutils
+    ];
+
+    postPatch = ''
+      # correct hashes of the patched files
+      mysql_hash=$(sha512sum lib/private/Setup/MySQL.php | head -c 128)
+      jq --arg mysql_hash $mysql_hash \
+        '.hashes."lib\/private\/Setup\/MySQL.php" = $mysql_hash' \
+        core/signature.json | sponge core/signature.json
+      postgresql_hash=$(sha512sum lib/private/Setup/PostgreSQL.php | head -c 128)
+      jq --arg postgresql_hash $postgresql_hash \
+        '.hashes."lib\/private\/Setup\/PostgreSQL.php" = $postgresql_hash' \
+        core/signature.json | sponge core/signature.json
+    '';
 
     passthru.tests = nixosTests.nextcloud;
 
