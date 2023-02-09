@@ -72,6 +72,7 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [
     freezegun
+    pytest-xdist
     pytestCheckHook
     sure
   ];
