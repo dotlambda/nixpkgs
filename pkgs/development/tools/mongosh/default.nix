@@ -1,5 +1,6 @@
 { lib
 , buildNpmPackage
+, fetchFromGitHub
 , fetchurl
 , testers
 , mongosh
@@ -7,6 +8,12 @@
 
 let
   source = lib.importJSON ./source.json;
+  github = fetchFromGitHub {
+    owner = "mongodb-js";
+    repo = "mongosh";
+    rev = "v${source.version}";
+    hash = "sha256-LKXhUAC08qzzLkKQatMEqZvrS6yCOVUdnSowlxaPbZI=";
+  };
 in
 buildNpmPackage {
   pname = "mongosh";
@@ -18,7 +25,7 @@ buildNpmPackage {
   };
 
   postPatch = ''
-    ln -s ${./package-lock.json} package-lock.json
+    cp ${github}/package-lock.json .
   '';
 
   npmDepsHash = source.deps;
