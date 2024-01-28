@@ -1,6 +1,5 @@
 { lib
 , fetchPypi
-, fetchpatch
 , buildPythonPackage
 , pythonOlder
 , blosc2
@@ -11,7 +10,9 @@
 , lzo
 , numpy
 , numexpr
+, oldest-supported-numpy
 , packaging
+, pkg-config
 , setuptools
 , sphinx
   # Test inputs
@@ -32,23 +33,11 @@ buildPythonPackage rec {
     hash = "sha256-1HAmPC5QxLfIY1oNmawf8vnnBMJNceX6M8RSnn0K2cM=";
   };
 
-  patches = [
-    (fetchpatch {
-      name = "numpy-1.25-compatibility.patch";
-      url = "https://github.com/PyTables/PyTables/commit/337792561e5924124efd20d6fea6bbbd2428b2aa.patch";
-      hash = "sha256-pz3A/jTPWXXlzr+Yl5PRUvdSAinebFsoExfek4RUHkc=";
-    })
-    (fetchpatch {
-      name = "numexpr-2.8.5-compatibility.patch";
-      url = "https://github.com/PyTables/PyTables/commit/1a235490ebe1a138da1139cfa19829b5f0a2af37.patch";
-      includes = [ "tables/tests/test_queries.py" ];
-      hash = "sha256-uMS+Z2Zcz68ILMQaBdIDMnCyasozCaCGOiGIyw0+Evc=";
-    })
-  ];
-
   nativeBuildInputs = [
     blosc2
     cython
+    oldest-supported-numpy
+    pkg-config
     setuptools
     sphinx
   ];
@@ -68,29 +57,17 @@ buildPythonPackage rec {
     packaging # uses packaging.version at runtime
   ];
 
-  # When doing `make distclean`, ignore docs
   postPatch = ''
-    substituteInPlace Makefile --replace "src doc" "src"
     # Force test suite to error when unittest runner fails
     substituteInPlace tables/tests/test_suite.py \
       --replace "return 0" "assert result.wasSuccessful(); return 0" \
       --replace "return 1" "assert result.wasSuccessful(); return 1"
-    substituteInPlace requirements.txt \
-      --replace "cython>=0.29.21" "" \
-      --replace "blosc2~=2.0.0" "blosc2"
   '';
 
   # Regenerate C code with Cython
   preBuild = ''
     make distclean
   '';
-
-  setupPyBuildFlags = [
-    "--hdf5=${lib.getDev hdf5}"
-    "--lzo=${lib.getDev lzo}"
-    "--bzip2=${lib.getDev bzip2}"
-    "--blosc=${lib.getDev c-blosc}"
-  ];
 
   nativeCheckInputs = [
     pytest
