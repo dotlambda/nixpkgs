@@ -30935,12 +30935,7 @@ with pkgs;
 
   gossa = callPackage ../applications/networking/gossa { };
 
-  gpsbabel = libsForQt5.callPackage ../applications/misc/gpsbabel { };
-
-  gpsbabel-gui = gpsbabel.override {
-    withGUI = true;
-    withDoc = true;
-  };
+  gpsbabel = qt6Packages.callPackage ../applications/misc/gpsbabel { };
 
   gpsd = callPackage ../servers/gpsd { };
 
