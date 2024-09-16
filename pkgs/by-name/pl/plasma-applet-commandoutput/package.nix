@@ -32,6 +32,6 @@ stdenv.mkDerivation (finalAttrs: {
     description = "Run a command periodically and render its output";
     homepage = "https://github.com/Zren/plasma-applet-commandoutput";
     license = lib.licenses.gpl2Plus;
-    maintainers = with lib.maintainers; [ ];
+    maintainers = with lib.maintainers; [ oliver-ni ];
   };
 })
