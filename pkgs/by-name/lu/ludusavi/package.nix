@@ -3,6 +3,7 @@
   stdenv,
   rustPlatform,
   fetchFromGitHub,
+  rclone,
   installShellFiles,
   cmake,
   pkg-config,
@@ -41,8 +42,12 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-IApPudo8oD6YkYJkGpowqpaqrsl2/Q2VFyYfYQI3mN0=";
   };
 
-  useFetchCargoVendor = true;
   cargoHash = "sha256-ixxUz+XJPzPu51sxHpXs92Tis2gj9SElqYtNiN+n2EY=";
+
+  postPatch = ''
+    substituteInPlace src/resource/config.rs \
+      --replace-fail 'which::which("rclone")' 'Ok::<&str, which::Error>("${lib.getExe rclone}")'
+  '';
 
   dontWrapGApps = true;
 
